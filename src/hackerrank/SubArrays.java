@@ -12,61 +12,63 @@ public class Solution {
         int [] array = new int[size];
         int index = 0;
         int counter = 0;
-        System.out.println("Size: " + size);
         while(sc.hasNextInt()){
              //save to array 
+           //  if(sc.nextInt() >= -10000 && sc.nextInt() < 10000)
             array [index] = sc.nextInt();
             index ++;
         }
-       System.out.println(Arrays.toString(array));
     
-       
         //iterate once and find index of negative integers 
         for(int i=0; i<size-1; i++){
+            //check constraint
+            if(size >= 1 && size <= 100){
+                
             if(i > 0){
                 //get the integer just before the negative integer
                 int previous = array[i-1];
                 int current = array[i];
                 int next = array[i+1];
+                System.out.println("prev: " + previous + " curr: " + current + " next:" + next);
                 //sum the integer (i-1), the actual negative integer (i) and the next (i+1) integer
                 int sum = previous + current + next;
-        //create counter that increments for each negative integer
+                // sum previous and current. if not negative return 0
+                int sumOfPreviousAndCurrent = previous + current;
+                if(sumOfPreviousAndCurrent < 0){
+                counter++;
+                }
+                //sum current and next.
+                int sumOfCurrentAndNext = current + next;
+               if(sumOfCurrentAndNext < 0){
+                    counter++;
+                }
+            //create counter that increments for each negative integer
          if(current < 0){
              counter++;
-            System.out.println("negative integer: " + current + ", counter is now: " + counter);
         // if at least one integer is negative, itarate over the entire array and sum all integers and if negative, increment counter by 1
         int sumOfAllElements = Arrays.stream(array).sum();
-        
-        System.out.println("total is " + sumOfAllElements + " incrementing..");
         if(sumOfAllElements < 0){
             counter++;
         }
         }                
-            System.out.println("prev: " + previous + " current: " + current + " next: " + next);
-            System.out.println("sum: " + sum);
             if(sum < 0){
                 counter ++;
-                System.out.println("sum is negative, incrementing. counter is: " + counter) ;
             }
              
             }
             
             else{
                 if(array[i] < 0){
-                    System.out.println("0th index item is negative: " + array[i]);
                     counter++;
-                    System.out.println("0th index item is negative, incrementing: " + counter);
                 }
            }
         }
-           System.out.println("negative subarrays: " + counter);
+        }
+           System.out.println(counter);
         
-        // if they are negative, increment counter +1
-        //print the counter 
-        
+    
     }
 }
-
 /**
 https://www.hackerrank.com/challenges/java-negative-subarray/problem?isFullScreen=true
 We define the following:
